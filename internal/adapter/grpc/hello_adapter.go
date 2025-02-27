@@ -59,3 +59,29 @@ func (a *GrpcAdapter) SayHelloToEveryone(stream grpc.ClientStreamingServer[hello
 		res += greet + ", "
 	}
 }
+
+func (a *GrpcAdapter) SayHelloContinuous(stream grpc.BidiStreamingServer[hello.HelloRequest, hello.HelloResponse]) error {
+	for {
+		req, err := stream.Recv()
+
+		if err == io.EOF {
+			return nil
+		}
+
+		if err != nil {
+			log.Fatalln("Error while reading from client", err)
+		}
+
+		greet := a.helloService.GenerateHello(req.Name)
+
+		err = stream.Send(
+			&hello.HelloResponse{
+				Greet: greet,
+			},
+		)
+
+		if err != nil {
+			log.Fatalln("Error while sending response to client", err)
+		}
+	}
+}
