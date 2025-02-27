@@ -2,6 +2,8 @@ github.com/AlfianVitoAnggoro/my-grpc-proto v0.0.1 h1:SEn0jWwIXZIC8AOnFDlWt828hAQ
 github.com/AlfianVitoAnggoro/my-grpc-proto v0.0.1/go.mod h1:z3rnEjiJi06bnF/svTN1sMNi7OWWP58AEjbbTB/LzLo=
 github.com/AlfianVitoAnggoro/my-grpc-proto v0.0.2 h1:HYNLtFamaGmI38g3QDfrDolGBOYv3y1V8tO152urquI=
 github.com/AlfianVitoAnggoro/my-grpc-proto v0.0.2/go.mod h1:z3rnEjiJi06bnF/svTN1sMNi7OWWP58AEjbbTB/LzLo=
+github.com/AlfianVitoAnggoro/my-grpc-proto v0.0.3 h1:RGji3c+pZj+sLfqJ/WJtaiK9warSfIOVBkP67fAEtn0=
+github.com/AlfianVitoAnggoro/my-grpc-proto v0.0.3/go.mod h1:z3rnEjiJi06bnF/svTN1sMNi7OWWP58AEjbbTB/LzLo=
 github.com/go-logr/logr v1.4.2 h1:6pFjapn8bFcIbiKo3XT4j/BhANplGihG6tvd+8rYgrY=
 github.com/go-logr/logr v1.4.2/go.mod h1:9T104GzyrTigFIr8wt5mBrctHMim0Nb2HLGrmQ40KvY=
 github.com/go-logr/stdr v1.2.2 h1:hSWxHoqTgW2S2qGc0LTAI563KZ5YKYRhT3MFKZMbjag=
