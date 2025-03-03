@@ -1,10 +1,12 @@
 package application
 
 import (
+	"fmt"
 	"log"
 	"time"
 
 	db "github.com/AlfianVitoAnggoro/my-grpc-go-server/internal/adapter/database"
+	"github.com/AlfianVitoAnggoro/my-grpc-go-server/internal/application/domain/bank"
 	dbank "github.com/AlfianVitoAnggoro/my-grpc-go-server/internal/application/domain/bank"
 	"github.com/AlfianVitoAnggoro/my-grpc-go-server/internal/port"
 	"github.com/google/uuid"
@@ -54,4 +56,54 @@ func (s *BankService) FindExchangeRate(fromCur string, toCur string, ts time.Tim
 	}
 
 	return float64(exchangeRate.Rate), nil
+}
+
+func (s *BankService) CreateTransaction(acct string, t dbank.Transaction) (uuid.UUID, error) {
+	newUuid := uuid.New()
+	now := time.Now()
+
+	bankAccountOrm, err := s.db.GetBankAccountByAccountNumber(acct)
+
+	if err != nil {
+		log.Printf("Can't create transaction for %v : %v\n", acct, err)
+		return uuid.Nil, fmt.Errorf("can't find account number %v : %v", acct, err.Error())
+	}
+
+	if t.TransactionType == bank.TransactionTypeOut && bankAccountOrm.CurrentBalance < t.Amount {
+		return bankAccountOrm.AccountUuid, fmt.Errorf(
+			"insufficient account balance %v for [out] transaction amount %v",
+			bankAccountOrm.CurrentBalance, t.Amount,
+		)
+	}
+
+	transactionOrm := db.BankTransactionOrm{
+		TransactionUuid:      newUuid,
+		AccountUuid:          bankAccountOrm.AccountUuid,
+		TransactionTimestamp: now,
+		Amount:               t.Amount,
+		TransactionType:      t.TransactionType,
+		Notes:                t.Notes,
+		CreatedAt:            now,
+		UpdatedAt:            now,
+	}
+
+	savedUuid, err := s.db.CreateTransaction(bankAccountOrm, transactionOrm)
+
+	return savedUuid, err
+}
+
+func (s *BankService) CalculateTransactionSummary(tcur *dbank.TransactionSummary,
+	trans dbank.Transaction) error {
+	switch trans.TransactionType {
+	case dbank.TransactionTypeIn:
+		tcur.SumIn += trans.Amount
+	case dbank.TransactionTypeOut:
+		tcur.SumOut += trans.Amount
+	default:
+		return fmt.Errorf("unknown transaction type %v", trans.TransactionType)
+	}
+
+	tcur.SumTotal = tcur.SumIn - tcur.SumOut
+
+	return nil
 }
