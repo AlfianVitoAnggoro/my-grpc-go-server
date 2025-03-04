@@ -1,1 +1,1 @@
-DELETE FROM bank_accounts; 
+DELETE FROM bank_accounts CASCADE; 

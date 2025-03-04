@@ -1,5 +1,5 @@
-github.com/AlfianVitoAnggoro/my-grpc-proto v0.0.7 h1:7kjp3PEq3aNdUqHqv5dJQohDAFyRhvQ/gD3Y6XGhZgQ=
-github.com/AlfianVitoAnggoro/my-grpc-proto v0.0.7/go.mod h1:z3rnEjiJi06bnF/svTN1sMNi7OWWP58AEjbbTB/LzLo=
+github.com/AlfianVitoAnggoro/my-grpc-proto v0.0.8 h1:Ovo7Gi2P+1tJ6l2Zq/4vsQGe5E6IdggIEX2KwoI1bf4=
+github.com/AlfianVitoAnggoro/my-grpc-proto v0.0.8/go.mod h1:z3rnEjiJi06bnF/svTN1sMNi7OWWP58AEjbbTB/LzLo=
 github.com/Azure/go-ansiterm v0.0.0-20230124172434-306776ec8161 h1:L/gRVlceqvL25UVaW/CKtUDjefjrs0SPonmDGUVOYP0=
 github.com/Azure/go-ansiterm v0.0.0-20230124172434-306776ec8161/go.mod h1:xomTg63KZ2rFqZQzSB4Vz2SUXa1BpHTVz9L5PTmPC4E=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
