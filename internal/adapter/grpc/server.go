@@ -8,23 +8,27 @@ import (
 	"github.com/AlfianVitoAnggoro/my-grpc-go-server/internal/port"
 	"github.com/AlfianVitoAnggoro/my-grpc-proto/protogen/go/bank"
 	"github.com/AlfianVitoAnggoro/my-grpc-proto/protogen/go/hello"
+	resl "github.com/AlfianVitoAnggoro/my-grpc-proto/protogen/go/resiliency"
 	"google.golang.org/grpc"
 )
 
 type GrpcAdapter struct {
-	helloService port.HelloServicePort
-	bankService  port.BankServicePort
-	grpcPort     int
-	server       *grpc.Server
+	helloService      port.HelloServicePort
+	bankService       port.BankServicePort
+	resiliencyService port.ResiliencyServicePort
+	grpcPort          int
+	server            *grpc.Server
 	hello.HelloServiceServer
 	bank.BankServiceServer
+	resl.ResiliencyServiceServer
 }
 
-func NewGrpcAdapter(helloService port.HelloServicePort, bankService port.BankServicePort, grpcPort int) *GrpcAdapter {
+func NewGrpcAdapter(helloService port.HelloServicePort, bankService port.BankServicePort, resiliencyService port.ResiliencyServicePort, grpcPort int) *GrpcAdapter {
 	return &GrpcAdapter{
-		helloService: helloService,
-		bankService:  bankService,
-		grpcPort:     grpcPort,
+		helloService:      helloService,
+		bankService:       bankService,
+		resiliencyService: resiliencyService,
+		grpcPort:          grpcPort,
 	}
 }
 
@@ -42,6 +46,7 @@ func (a *GrpcAdapter) Run() {
 
 	hello.RegisterHelloServiceServer(grpcServer, a)
 	bank.RegisterBankServiceServer(grpcServer, a)
+	resl.RegisterResiliencyServiceServer(grpcServer, a)
 
 	if err = grpcServer.Serve(listen); err != nil {
 		log.Fatalf("failed to serve gRPC on port %d : %v\n", a.grpcPort, err)
