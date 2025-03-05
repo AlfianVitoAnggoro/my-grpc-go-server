@@ -3,12 +3,12 @@ module github.com/AlfianVitoAnggoro/my-grpc-go-server
 go 1.23.5
 
 require (
-	github.com/AlfianVitoAnggoro/my-grpc-proto v0.0.10
+	github.com/AlfianVitoAnggoro/my-grpc-proto v0.0.11
 	github.com/golang-migrate/migrate/v4 v4.18.2
 	github.com/google/uuid v1.6.0
 	github.com/jackc/pgx/v4 v4.18.3
 	google.golang.org/genproto v0.0.0-20250303144028-a0af3efb3deb
-	google.golang.org/grpc v1.70.0
+	google.golang.org/grpc v1.71.0
 	gorm.io/gorm v1.25.12
 )
 
@@ -33,7 +33,7 @@ require (
 	github.com/lib/pq v1.10.9 // indirect
 	go.uber.org/atomic v1.11.0 // indirect
 	golang.org/x/crypto v0.35.0 // indirect
-	golang.org/x/net v0.35.0 // indirect
+	golang.org/x/net v0.36.0 // indirect
 	golang.org/x/sys v0.30.0 // indirect
 	golang.org/x/text v0.22.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20250303144028-a0af3efb3deb
