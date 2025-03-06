@@ -5,6 +5,7 @@ import (
 	"log"
 	"net"
 
+	// "github.com/AlfianVitoAnggoro/my-grpc-go-server/internal/interceptor"
 	"github.com/AlfianVitoAnggoro/my-grpc-go-server/internal/port"
 	"github.com/AlfianVitoAnggoro/my-grpc-proto/protogen/go/bank"
 	"github.com/AlfianVitoAnggoro/my-grpc-proto/protogen/go/hello"
@@ -42,7 +43,23 @@ func (a *GrpcAdapter) Run() {
 
 	log.Printf("Server listening on port %v", a.grpcPort)
 
-	grpcServer := grpc.NewServer()
+	// creds, err := credentials.NewServerTLSFromFile("ssl/server.crt", "ssl/server.pem")
+
+	// if err != nil {
+	// 	log.Fatalln("Can't create server credentials :", err)
+	// }
+
+	grpcServer := grpc.NewServer(
+	// grpc.Creds(creds),
+	// grpc.ChainUnaryInterceptor(
+	// 	interceptor.LogUnaryServerInterceptor(),
+	// 	interceptor.BasicUnaryServerInterceptor(),
+	// ),
+	// grpc.ChainStreamInterceptor(
+	// 	interceptor.LogStreamServerInterceptor(),
+	// 	interceptor.BasicStreamServerInterceptor(),
+	// ),
+	)
 	a.server = grpcServer
 
 	hello.RegisterHelloServiceServer(grpcServer, a)
